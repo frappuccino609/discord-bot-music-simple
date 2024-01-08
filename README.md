@@ -30,7 +30,7 @@ Bot musik sederhana menggunakan Discord.js untuk memainkan lagu dari YouTube.
 
 1. Undang bot ke server Discord Anda.
 
-2. Bergabunglah dengan saluran suara di server.
+2. Bergabunglah dengan channel voice di server.
 
 3. Gunakan perintah `!play [URL_YOUTUBE]` untuk memainkan lagu dari YouTube.
 
