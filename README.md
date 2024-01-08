@@ -1,56 +1,51 @@
 # discord-bot-music-simple
 
-Bot musik sederhana menggunakan Discord.js untuk memainkan lagu dari YouTube.
+A simple music bot using Discord.js to play songs from YouTube.
+using ytdl-core
 
-## Fitur
+## Features
 
-- Memainkan lagu dari YouTube
-- Mengatur volume, melewatkan lagu, dan menghentikan pemutaran
-- Antrian pemutaran lagu
+- Play songs from YouTube
+- Adjust volume, skip songs, and stop playback
+- Song playback queue
 
-## Instalasi
+## Installation
 
-1. **Instal dependencies:**
-
+1. **Install dependencies:**
     ```bash
     npm install discord.js ytdl-core
     ```
 
-2. **Konfigurasi bot:**
+2. **Configure the bot:**
+   - Replace the value `YOUR_BOT_TOKEN` with your Discord bot token in `config.json`.
 
-   - Ganti nilai `YOUR_BOT_TOKEN` dengan token bot Discord Anda dalam `config.json`.
-
-3. **Jalankan bot:**
-
+3. **Run the bot:**
     ```bash
     node index.js
     ```
 
-## Penggunaan
+## Usage
 
-1. Undang bot ke server Discord Anda.
+1. Invite the bot to your Discord server.
+2. Join a voice channel on the server.
+3. Use the command `!play [YOUTUBE_URL]` to play a song from YouTube.
+4. Use other commands like `!skip` and `!stop` as needed.
 
-2. Bergabunglah dengan channel voice di server.
+## Bot Commands
 
-3. Gunakan perintah `!play [URL_YOUTUBE]` untuk memainkan lagu dari YouTube.
+- `!play [YOUTUBE_URL]`: Play a song from YouTube.
+- `!skip`: Skip the currently playing song.
+- `!stop`: Stop playback and leave the voice channel.
 
-4. Gunakan perintah lain seperti `!skip` dan `!stop` sesuai kebutuhan.
+## Notes
 
-## Perintah Bot
+- This bot is developed following Discord's guidelines and rules. Make sure to understand and comply with those rules.
+- Ensure you have the appropriate permissions and copyrights to play audio/video content.
 
-- `!play [URL_YOUTUBE]`: Memainkan lagu dari YouTube.
-- `!skip`: Melewati lagu yang sedang diputar.
-- `!stop`: Menghentikan pemutaran dan keluar dari saluran suara.
+## Contribution
 
-## Catatan
+If you want to contribute to this project, please create a pull request and report any issues you encounter.
 
-- Bot ini dikembangkan dengan mengikuti panduan dan aturan Discord. Pastikan untuk memahami dan mematuhi aturan tersebut.
-- Pastikan Anda memiliki izin dan hak cipta yang sesuai untuk memainkan konten audio/video.
+## License
 
-## Kontribusi
-
-Jika Anda ingin berkontribusi pada proyek ini, silakan buat *pull request* dan laporkan *issue* jika Anda menemui masalah.
-
-## Lisensi
-
-Proyek ini dilisensikan di bawah Lisensi MIT - lihat [LICENSE.md](LICENSE) untuk detail lebih lanjut.
+This project is licensed under the MIT License - see [LICENSE](LICENSE) for more details.
