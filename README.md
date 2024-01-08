@@ -18,12 +18,6 @@ Bot musik sederhana menggunakan Discord.js untuk memainkan lagu dari YouTube.
 
 2. **Konfigurasi bot:**
 
-   - Salin `config.example.json` ke `config.json`:
-
-     ```bash
-     cp config.example.json config.json
-     ```
-
    - Ganti nilai `YOUR_BOT_TOKEN` dengan token bot Discord Anda dalam `config.json`.
 
 3. **Jalankan bot:**
