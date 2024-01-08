@@ -24,16 +24,86 @@ client.on('message', async message => {
   const command = args.shift().toLowerCase();
 
   if (command === 'play') {
-    // Implementasi kode untuk perintah play
-    // ...
+    const songInfo = await ytdl.getInfo(args[0]);
+    const song = {
+      title: songInfo.title,
+      url: songInfo.video_url,
+    };
+
+    if (!serverQueue) {
+      const queueContruct = {
+        textChannel: message.channel,
+        voiceChannel: voiceChannel,
+        connection: null,
+        songs: [],
+        volume: 5,
+        playing: true,
+      };
+
+      queue.set(message.guild.id, queueContruct);
+
+      queueContruct.songs.push(song);
+
+      try {
+        const connection = await voiceChannel.join();
+        queueContruct.connection = connection;
+        play(message.guild, queueContruct.songs[0]);
+      } catch (err) {
+        console.log(err);
+        queue.delete(message.guild.id);
+        return message.channel.send(err);
+      }
+    } else {
+      serverQueue.songs.push(song);
+      return message.channel.send(`${song.title} telah ditambahkan ke antrian!`);
+    }
   } else if (command === 'skip') {
-    // Implementasi kode untuk perintah skip
-    // ...
+    if (!message.member.voice.channel) {
+      return message.channel.send('Anda harus bergabung dengan saluran suara terlebih dahulu!');
+    }
+    if (!serverQueue) {
+      return message.channel.send('Tidak ada lagu yang dapat dilewati.');
+    }
+    serverQueue.connection.dispatcher.end();
+    return message.channel.send('Lagu dilewati.');
   } else if (command === 'stop') {
-    // Implementasi kode untuk perintah stop
-    // ...
+    if (!message.member.voice.channel) {
+      return message.channel.send('Anda harus bergabung dengan saluran suara terlebih dahulu!');
+    }
+    if (!serverQueue) {
+      return message.channel.send('Tidak ada lagu yang dapat dihentikan.');
+    }
+    serverQueue.songs = [];
+    serverQueue.connection.dispatcher.end();
+    return message.channel.send('Pemutaran dihentikan dan antrian dibersihkan.');
+  } else if (command === 'queue') {
+    if (!serverQueue || serverQueue.songs.length === 0) {
+      return message.channel.send('Antrian kosong.');
+    }
+  
+    const queueList = serverQueue.songs.map((song, index) => `${index + 1}. ${song.title}`).join('\n');
+    return message.channel.send(`**Antrian Pemutaran:**
+  ${queueList}`);
+  } else if (command === 'volume') {
+    const newVolume = parseInt(args[0]);
+  
+    if (isNaN(newVolume) || newVolume < 0 || newVolume > 10) {
+      return message.channel.send('Volume harus berada di antara 0 dan 10.');
+    }
+  
+    serverQueue.volume = newVolume;
+    serverQueue.connection.dispatcher.setVolumeLogarithmic(newVolume / 5);
+    return message.channel.send(`Volume diatur ke ${newVolume}.`);
+  } else if (command === 'remove') {
+    const indexToRemove = parseInt(args[0]);
+  
+    if (isNaN(indexToRemove) || indexToRemove < 1 || indexToRemove > serverQueue.songs.length) {
+      return message.channel.send('Indeks lagu tidak valid.');
+    }
+  
+    const removedSong = serverQueue.songs.splice(indexToRemove - 1, 1);
+    return message.channel.send(`Lagu "${removedSong[0].title}" dihapus dari antrian.`);
   }
-  // Tambahan perintah lainnya jika diperlukan
 });
 
 function play(guild, song) {
