@@ -53,4 +53,4 @@ Jika Anda ingin berkontribusi pada proyek ini, silakan buat *pull request* dan l
 
 ## Lisensi
 
-Proyek ini dilisensikan di bawah Lisensi MIT - lihat [LICENSE.md](LICENSE.md) untuk detail lebih lanjut.
+Proyek ini dilisensikan di bawah Lisensi MIT - lihat [LICENSE.md](LICENSE) untuk detail lebih lanjut.
